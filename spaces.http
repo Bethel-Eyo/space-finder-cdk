@@ -2,4 +2,9 @@ GET https://jkpjwu1rj6.execute-api.us-east-1.amazonaws.com/prod/spaces
 ###
 
 POST https://jkpjwu1rj6.execute-api.us-east-1.amazonaws.com/prod/spaces
+Content-Type: application/json
+
+{
+    "location": "Cork"
+}
 ###
