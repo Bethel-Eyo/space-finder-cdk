@@ -10,10 +10,15 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.140",
     "@types/node": "^20.14.2",
     "aws-cdk-lib": "^2.145.0",
     "constructs": "^10.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "uuid": "^10.0.0"
   }
 }
