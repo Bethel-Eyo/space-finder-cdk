@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import { getSuffixFromStack } from "../Utils";
 
 export class DataStack extends Stack {
-    public readonly spacesTable: ITable
+  public readonly spacesTable: ITable;
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
