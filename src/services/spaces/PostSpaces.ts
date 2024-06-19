@@ -1,4 +1,5 @@
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { v4 } from "uuid";
 
@@ -9,22 +10,16 @@ export async function postSpaces(
   if (event.body) {
     const randomId = v4();
     const item = JSON.parse(event.body);
+    item.id = randomId;
 
     const result = await ddbClient.send(
       new PutItemCommand({
         TableName: process.env.TABLE_NAME,
-        Item: {
-          id: {
-            S: randomId,
-          },
-          location: {
-            S: item.location,
-          },
-        },
+        Item: marshall(item),
       })
     );
 
-    console.log(result);
+    console.log(marshall(item));
 
     return {
         statusCode: 201,
