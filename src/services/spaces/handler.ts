@@ -25,7 +25,7 @@ async function handler(
     console.error(error);
     return {
       statusCode: 500,
-      body: JSON.stringify(error.message),
+      body: JSON.stringify(error),
     };
   }
 
