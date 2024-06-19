@@ -15,7 +15,7 @@ export class DataStack extends Stack {
         name: "id",
         type: AttributeType.STRING,
       },
-      tableName: `SpaceTable-${suffix}`, // this should be dynamic to avoid tables using same names
+      tableName: `SpacesTable-${suffix}`, // this should be dynamic to avoid tables using same names
     });
   }
 }

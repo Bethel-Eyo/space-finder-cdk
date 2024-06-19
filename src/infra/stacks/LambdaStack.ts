@@ -17,7 +17,7 @@ export class LambdaStack extends Stack {
   constructor(scope: Construct, id: string, props: LambdaStackProps) {
     super(scope, id, props);
 
-    const spacesLambda = new NodejsFunction(this, "HelloLambda", {
+    const spacesLambda = new NodejsFunction(this, "SpacesLambda", {
       runtime: Runtime.NODEJS_20_X,
       handler: "handler",
       entry: path.join(__dirname, "..", "..", "services", "spaces", "handler.ts"),
@@ -30,7 +30,7 @@ export class LambdaStack extends Stack {
       new PolicyStatement({
         effect: Effect.ALLOW,
         resources: [props.spacesTable.tableArn],
-        actions: ["dynamodb:PutItem"],
+        actions: ["dynamodb:PutItem", "dynamodb:Scan", "dynamodb:GetItem"],
       })
     );
 
