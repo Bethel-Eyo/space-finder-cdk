@@ -3,6 +3,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda
 import { postSpaces } from "./PostSpaces";
 import { getSpaces } from "./GetSpaces";
 import { updateSpaces } from "./UpdateSpaces";
+import { deleteSpaces } from "./DeleteSpaces";
 
 const ddbClient = new DynamoDBClient({});
 
@@ -20,6 +21,9 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
       case "PUT":
         const putResponse = await updateSpaces(event, ddbClient);
         return putResponse;
+      case "DELETE":
+        const deleteResponse = await deleteSpaces(event, ddbClient);
+        return deleteResponse;
       default:
         break;
     }

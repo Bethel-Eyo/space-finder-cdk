@@ -18,3 +18,6 @@ PUT https://stuagwhol0.execute-api.us-east-1.amazonaws.com/prod/spaces?id=a48d71
     "location": "Killarney Kerry"
 }
 ###
+
+DELETE https://stuagwhol0.execute-api.us-east-1.amazonaws.com/prod/spaces?id=4424659b-96a5-48b7-ba15-f92f70394251
+###
