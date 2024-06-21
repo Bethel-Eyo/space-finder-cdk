@@ -5,9 +5,16 @@ POST https://stuagwhol0.execute-api.us-east-1.amazonaws.com/prod/spaces
 Content-Type: application/json
 
 {
-    "location": "Galway"
+    "location": "DunDalk"
 }
 ###
 
 GET https://stuagwhol0.execute-api.us-east-1.amazonaws.com/prod/spaces?id=a48d717d-3193-49d9-a261-5cba09265012
+###
+
+PUT https://stuagwhol0.execute-api.us-east-1.amazonaws.com/prod/spaces?id=a48d717d-3193-49d9-a261-5cba09265012
+
+{
+    "location": "Killarney Kerry"
+}
 ###

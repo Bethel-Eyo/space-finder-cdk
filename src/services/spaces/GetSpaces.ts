@@ -8,6 +8,7 @@ export async function getSpaces(
 ): Promise<APIGatewayProxyResult> {
   if (event.queryStringParameters) {
     if ("id" in event.queryStringParameters) {
+      /**if there are queryStringParameters, then we get a single space */
       const spaceId = event.queryStringParameters["id"];
       const getItemResponse = await ddbClient.send(
         new GetItemCommand({
@@ -39,6 +40,7 @@ export async function getSpaces(
     }
   }
 
+  /**If there are no queryStringParameters then we get all the spaces */
   const result = await ddbClient.send(
     new ScanCommand({
       TableName: process.env.TABLE_NAME,
