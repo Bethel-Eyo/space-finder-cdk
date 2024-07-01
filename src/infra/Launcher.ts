@@ -4,6 +4,7 @@ import { LambdaStack } from "./stacks/LambdaStack";
 import { ApiStack } from "./stacks/ApiStack";
 import { AuthStack } from "./stacks/AuthStack";
 import { UIDeploymentStack } from "./stacks/UIDeploymentStack";
+import { MonitorStack } from "./stacks/MonitorStack";
 
 const app = new App();
 
@@ -23,3 +24,4 @@ new ApiStack(app, "ApiStack", {
 });
 
 new UIDeploymentStack(app, "UIDeploymentStack");
+new MonitorStack(app, "MonitorStack")
