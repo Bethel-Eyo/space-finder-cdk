@@ -13,6 +13,8 @@ const headers = new Headers({
 async function handler(event: SNSEvent, context) {
   for (const record of event.Records) {
     console.log(`Bethel, we have a problem: ${record.Sns.Message}`);
+    console.log(`meta webhookUrl: ${webHookUrl}`);
+    console.log(`meta token: ${token}`);
     const response = await fetch(`${webHookUrl}?access_token=${token}`, {
       method: "POST",
       body: JSON.stringify({
