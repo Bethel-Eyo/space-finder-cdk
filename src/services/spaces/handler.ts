@@ -6,7 +6,7 @@ import { updateSpaces } from "./UpdateSpaces";
 import { deleteSpaces } from "./DeleteSpaces";
 import { JsonError, MissingFieldError } from "../shared/Validator";
 import { addCorsHeader } from "../shared/Utils";
-import { captureAWSv3Client } from "aws-xray-sdk-core";
+import { captureAWSv3Client, getSegment } from "aws-xray-sdk-core";
 
 const ddbClient = captureAWSv3Client(new DynamoDBClient({}));
 
@@ -14,6 +14,23 @@ async function handler(
   event: APIGatewayProxyEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
+
+  /**This is just a simulation of a long and short call, usually the
+   * complex function itself will determine the length of the call not
+   * a setTimeout function.
+   */
+  const subSeg = getSegment()?.addNewSubsegment("myLongCall");
+  await new Promise((resolve) => {
+    setTimeout(resolve, 1000); // 1sec
+  });
+  subSeg?.close();
+
+  const subSeg2 = getSegment()?.addNewSubsegment("myshortCall");
+  await new Promise((resolve) => {
+    setTimeout(resolve, 300); // 300millisecs
+  });
+  subSeg2?.close();
+
   try {
     switch (event.httpMethod) {
       case "GET":
