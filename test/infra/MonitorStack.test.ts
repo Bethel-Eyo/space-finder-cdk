@@ -1,6 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { MonitorStack } from "../../src/infra/stacks/MonitorStack";
-import { Template } from "aws-cdk-lib/assertions";
+import { Match, Template } from "aws-cdk-lib/assertions";
 
 describe("MonitorStack test suite", () => {
   /** The reason why we use the beforeAll as opposed to the regular beforeEach
@@ -24,8 +24,6 @@ describe("MonitorStack test suite", () => {
       Handler: "index.handler",
       Runtime: "nodejs20.x",
     });
-
-    expect(true).toBeTruthy();
   });
 
   test("Sns topic properties", () => {
@@ -33,7 +31,38 @@ describe("MonitorStack test suite", () => {
       DisplayName: "SpacesAlarmTopic",
       TopicName: "SpacesAlarmTopic",
     });
+  });
 
-    expect(true).toBeTruthy();
+  test("Sns subscription properties - with matchers", () => {
+    monitorStackTemplate.hasResourceProperties(
+      "AWS::SNS::Subscription",
+      Match.objectEquals({
+        Protocol: "lambda",
+        TopicArn: {
+          Ref: Match.stringLikeRegexp("SpacesAlarmTopic"),
+        },
+        Endpoint: {
+          "Fn::GetAtt": [Match.stringLikeRegexp("WebhookLambda"), "Arn"],
+        },
+      })
+    );
+  });
+
+  test("Sns subscription properties - with exact values", () => {
+    const snsTopic = monitorStackTemplate.findResources("AWS::SNS::Topic");
+    const snsTopicName = Object.keys(snsTopic)[0];
+
+    const lambda = monitorStackTemplate.findResources("AWS::Lambda::Function");
+    const lambdaName = Object.keys(lambda)[0];
+
+    monitorStackTemplate.hasResourceProperties("AWS::SNS::Subscription", {
+      Protocol: "lambda",
+      TopicArn: {
+        Ref: snsTopicName,
+      },
+      Endpoint: {
+        "Fn::GetAtt": [lambdaName, "Arn"],
+      },
+    });
   });
 });
