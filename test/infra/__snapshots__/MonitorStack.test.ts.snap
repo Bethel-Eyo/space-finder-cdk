@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonitorStack test suite Monitor stack Snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "SpaceApi4xxAlarm8C38E49E": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "SpacesAlarmTopicAAAA0BE3",
+          },
+        ],
+        "AlarmName": "SpaceApi4xxAlarm",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ApiName",
+            "Value": "SpacesApi",
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway",
+        "OKActions": [
+          {
+            "Ref": "SpacesAlarmTopicAAAA0BE3",
+          },
+        ],
+        "Period": 60,
+        "Statistic": "Sum",
+        "Threshold": 5,
+        "Unit": "Count",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "SpacesAlarmTopicAAAA0BE3": {
+      "Properties": {
+        "DisplayName": "SpacesAlarmTopic",
+        "TopicName": "SpacesAlarmTopic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "WebhookLambda118EFE5D": {
+      "DependsOn": [
+        "WebhookLambdaServiceRoleDB3A5765",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "971e28efe850d9afa78c6db5a32ccc5ff17338ce8c08ed26d1cfb76717e18d40.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "META_TOKEN": "EAAXH3uRcPZAgBOZCjZBlTW7ZAWz8aNFkpnvaI5ZCqRWajET9s72aYMyeXZAMw0qIrUohJjZBHcZAdnDXZBbtDaUUNyc0NYWmbVYP6DeY7bJlrpTOuKZBdvhQCb0m1t0Q59ImSoESKqYm1tVn75g4qyU3X1hnXHeUnYNTcxNkpKl5p41ON5WaF35JxLJzgqluebP9ZC2oZAsizbNFkjY5oIXgqpMZD",
+            "META_WEBHOOKURL": "https://graph.facebook.com/v20.0/374697945721078/messages",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "WebhookLambdaServiceRoleDB3A5765",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "WebhookLambdaAllowInvokeMonitorStackSpacesAlarmTopicB3FB9ABC36E4BBD6": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "WebhookLambda118EFE5D",
+            "Arn",
+          ],
+        },
+        "Principal": "sns.amazonaws.com",
+        "SourceArn": {
+          "Ref": "SpacesAlarmTopicAAAA0BE3",
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "WebhookLambdaServiceRoleDB3A5765": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "WebhookLambdaSpacesAlarmTopicE9C03989": {
+      "Properties": {
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "WebhookLambda118EFE5D",
+            "Arn",
+          ],
+        },
+        "Protocol": "lambda",
+        "TopicArn": {
+          "Ref": "SpacesAlarmTopicAAAA0BE3",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`MonitorStack test suite lambda stack Snapshot 1`] = `
+{
+  "WebhookLambda118EFE5D": {
+    "DependsOn": [
+      "WebhookLambdaServiceRoleDB3A5765",
+    ],
+    "Properties": {
+      "Code": {
+        "S3Bucket": {
+          "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+        },
+        "S3Key": "971e28efe850d9afa78c6db5a32ccc5ff17338ce8c08ed26d1cfb76717e18d40.zip",
+      },
+      "Environment": {
+        "Variables": {
+          "META_TOKEN": "EAAXH3uRcPZAgBOZCjZBlTW7ZAWz8aNFkpnvaI5ZCqRWajET9s72aYMyeXZAMw0qIrUohJjZBHcZAdnDXZBbtDaUUNyc0NYWmbVYP6DeY7bJlrpTOuKZBdvhQCb0m1t0Q59ImSoESKqYm1tVn75g4qyU3X1hnXHeUnYNTcxNkpKl5p41ON5WaF35JxLJzgqluebP9ZC2oZAsizbNFkjY5oIXgqpMZD",
+          "META_WEBHOOKURL": "https://graph.facebook.com/v20.0/374697945721078/messages",
+        },
+      },
+      "Handler": "index.handler",
+      "Role": {
+        "Fn::GetAtt": [
+          "WebhookLambdaServiceRoleDB3A5765",
+          "Arn",
+        ],
+      },
+      "Runtime": "nodejs20.x",
+    },
+    "Type": "AWS::Lambda::Function",
+  },
+}
+`;
+
+exports[`MonitorStack test suite snsTopic stack Snapshot 1`] = `
+{
+  "SpacesAlarmTopicAAAA0BE3": {
+    "Properties": {
+      "DisplayName": "SpacesAlarmTopic",
+      "TopicName": "SpacesAlarmTopic",
+    },
+    "Type": "AWS::SNS::Topic",
+  },
+}
+`;

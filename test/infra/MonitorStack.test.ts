@@ -1,6 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { MonitorStack } from "../../src/infra/stacks/MonitorStack";
-import { Match, Template } from "aws-cdk-lib/assertions";
+import { Capture, Match, Template } from "aws-cdk-lib/assertions";
 
 describe("MonitorStack test suite", () => {
   /** The reason why we use the beforeAll as opposed to the regular beforeEach
@@ -64,5 +64,30 @@ describe("MonitorStack test suite", () => {
         "Fn::GetAtt": [lambdaName, "Arn"],
       },
     });
+  });
+
+  test("Alarm actions", () => {
+    const alarmActionsCapture = new Capture();
+    monitorStackTemplate.hasResourceProperties("AWS::CloudWatch::Alarm", {
+      AlarmActions: alarmActionsCapture
+    });
+
+    expect(alarmActionsCapture.asArray()).toEqual([{
+      Ref: expect.stringMatching(/^SpacesAlarmTopic/)
+    }])
+  });
+
+  test("Monitor stack Snapshot", () => {
+    expect(monitorStackTemplate.toJSON()).toMatchSnapshot();
+  });
+
+  test("lambda stack Snapshot", () => {
+    const lambda = monitorStackTemplate.findResources("AWS::Lambda::Function");
+    expect(lambda).toMatchSnapshot();
+  });
+
+  test("snsTopic stack Snapshot", () => {
+    const snsTopic = monitorStackTemplate.findResources("AWS::SNS::Topic");
+    expect(snsTopic).toMatchSnapshot();
   });
 });
