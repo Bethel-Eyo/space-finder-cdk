@@ -4,6 +4,7 @@ dotenv.config();
 
 const webHookUrl = process.env.META_WEBHOOKURL;
 const token = process.env.META_TOKEN;
+const phoneNumber = process.env.WHATSAPP_BIZ_PHONE
 
 const headers = new Headers({
   "Content-Type": "application/json",
@@ -19,7 +20,7 @@ async function handler(event: SNSEvent, context) {
       method: "POST",
       body: JSON.stringify({
         messaging_product: "whatsapp",
-        to: "353899672337",
+        to: phoneNumber,
         text: {
           body: `Bethel, we have a problem: ${record.Sns.Message}`,
         },

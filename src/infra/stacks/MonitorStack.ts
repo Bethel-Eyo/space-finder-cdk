@@ -20,7 +20,8 @@ export class MonitorStack extends Stack {
       entry: join(__dirname, "..", "..", "services", "monitor", "handler.ts"),
       environment: {
         META_WEBHOOKURL: config.META_WEBHOOKURL,
-        META_TOKEN: config.META_TOKEN
+        META_TOKEN: config.META_TOKEN,
+        WHATSAPP_BIZ_PHONE: config.WHATSAPP_BIZ_PHONE
       }
     });
 
