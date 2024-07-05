@@ -1,10 +1,10 @@
-import { handler } from "../../src/services/monitor/handler";
+import { handler } from "../../../src/services/monitor/handler";
 
 const headers = new Headers({
   "Content-Type": "application/json",
 });
 
-describe("Initial tests", () => {
+describe("Monitor handler tests", () => {
   const fetchSpy = jest.spyOn(global, "fetch");
   fetchSpy.mockImplementation(() => Promise.resolve({} as any));
 
@@ -29,7 +29,7 @@ describe("Initial tests", () => {
     expect(fetchSpy).toHaveBeenCalledWith(expect.any(String), {
       method: "POST",
       body: expect.anything(),
-      headers: expect.any(Headers),
+      headers: headers,
     });
   });
 
