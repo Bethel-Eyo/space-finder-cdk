@@ -56,12 +56,13 @@ exports[`MonitorStack test suite Monitor stack Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "971e28efe850d9afa78c6db5a32ccc5ff17338ce8c08ed26d1cfb76717e18d40.zip",
+          "S3Key": "d8d41fe9a652ba7fb2cf9ad303845fbc50f151efde5ae7b80a384d8e46d843f0.zip",
         },
         "Environment": {
           "Variables": {
             "META_TOKEN": "EAAXH3uRcPZAgBOZCjZBlTW7ZAWz8aNFkpnvaI5ZCqRWajET9s72aYMyeXZAMw0qIrUohJjZBHcZAdnDXZBbtDaUUNyc0NYWmbVYP6DeY7bJlrpTOuKZBdvhQCb0m1t0Q59ImSoESKqYm1tVn75g4qyU3X1hnXHeUnYNTcxNkpKl5p41ON5WaF35JxLJzgqluebP9ZC2oZAsizbNFkjY5oIXgqpMZD",
             "META_WEBHOOKURL": "https://graph.facebook.com/v20.0/374697945721078/messages",
+            "WHATSAPP_BIZ_PHONE": "353899672337",
           },
         },
         "Handler": "index.handler",
@@ -179,12 +180,13 @@ exports[`MonitorStack test suite lambda stack Snapshot 1`] = `
         "S3Bucket": {
           "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
         },
-        "S3Key": "971e28efe850d9afa78c6db5a32ccc5ff17338ce8c08ed26d1cfb76717e18d40.zip",
+        "S3Key": "d8d41fe9a652ba7fb2cf9ad303845fbc50f151efde5ae7b80a384d8e46d843f0.zip",
       },
       "Environment": {
         "Variables": {
           "META_TOKEN": "EAAXH3uRcPZAgBOZCjZBlTW7ZAWz8aNFkpnvaI5ZCqRWajET9s72aYMyeXZAMw0qIrUohJjZBHcZAdnDXZBbtDaUUNyc0NYWmbVYP6DeY7bJlrpTOuKZBdvhQCb0m1t0Q59ImSoESKqYm1tVn75g4qyU3X1hnXHeUnYNTcxNkpKl5p41ON5WaF35JxLJzgqluebP9ZC2oZAsizbNFkjY5oIXgqpMZD",
           "META_WEBHOOKURL": "https://graph.facebook.com/v20.0/374697945721078/messages",
+          "WHATSAPP_BIZ_PHONE": "353899672337",
         },
       },
       "Handler": "index.handler",

@@ -1,4 +1,4 @@
-import { SpaceEntry } from "../Model/Model";
+import { SpaceEntry } from "../model/Model";
 
 export class MissingFieldError extends Error {
   constructor(missingField: string) {
